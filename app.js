@@ -1,15 +1,14 @@
 require('dotenv/config');
 const { db } = require('./src/database/db');
 const express = require('express');
+const routes = require('./src/routes');
 
 const PORT = process.env.PORT;
 
 const app = express();
 app.use(express.json());
 
-app.get('/', (req, res) => {
-   return res.json({message: 'Hello Word'});
-});
+app.use('/', routes);
 
 app.listen(PORT, async () => {
    await db.sync();
