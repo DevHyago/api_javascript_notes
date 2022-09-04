@@ -1,14 +1,14 @@
 require('dotenv/config');
 const { db } = require('./src/database/db');
 const express = require('express');
-const routes = require('./src/routes');
+const routerUser = require('./src/routes/users');
 
 const PORT = process.env.PORT;
 
 const app = express();
 app.use(express.json());
 
-app.use('/', routes);
+app.use('/', routerUser);
 
 app.listen(PORT, async () => {
    await db.sync();
