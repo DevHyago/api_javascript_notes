@@ -18,7 +18,7 @@ async function isOwner(req, res, next){
    if(note.author_id === userId){
       next();
    }else{
-      throw new Error('You are not allowed to acces third-party notes!');
+      throw new Error('You do not have permission to access this note!');
    }
 
 }

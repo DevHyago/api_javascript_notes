@@ -1,5 +1,6 @@
 const CreatedNoteService = require('../services/note/CreateNoteService');
 const FindOneService = require('../services/note/FindOneService');
+const FindAllNoteService = require('../services/note/FindAllNoteService');
 
 class NoteController{
 
@@ -25,6 +26,17 @@ class NoteController{
       const note = await findOneService.execute(id);
 
       return res.json(note);
+
+   }
+
+   async findAll(req, res){
+      const { id } = req.user;
+
+      const findAllNoteService = new FindAllNoteService();
+
+      const notes = await findAllNoteService.execute(id);
+
+      return res.json(notes);
 
    }
 
