@@ -15,7 +15,7 @@ async function isOwner(req, res, next){
       throw new Error('The note does not exist');
    }
 
-   if(note.id === userId){
+   if(note.author_id === userId){
       next();
    }else{
       throw new Error('You are not allowed to acces third-party notes!');
