@@ -10,16 +10,13 @@ class UpdateNoteService{
          }, {
             where: {
                id: id
-            }
-         });
-
-         const newNote = await noteModel.findOne({
-            where: {
-               id: id
-            }
+            },
+            returning: true,
+            plain: true
          });
    
-         return newNote;
+         return note[1];
+
       }catch(e){
          throw new Error('Error updating database record');
       }
