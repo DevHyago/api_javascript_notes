@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 const userModel = require('../models/User');
 const secret = process.env.JWT_SECRET;
 
-async function auth(req, res, next){
+function auth(req, res, next){
 
    const token = req.headers['x-acces-token'];
 
@@ -10,13 +10,11 @@ async function auth(req, res, next){
       return res.status(401).end();
    }
 
-   jwt.verify(token, secret, (err, decode) => {
+   jwt.verify(token, secret, async (err, decode) => {
 
       if(err){
          throw new Error('Unauthorized: Token invalid');
       }
-
-      let user;
 
       try{
          const user = await userModel.findOne({
@@ -25,7 +23,11 @@ async function auth(req, res, next){
             }
          });
 
-         req.user = user;
+         req.user = {
+            id: user.id,
+            name: user.name,
+            email: user.email
+         };
 
          next();
       }catch(e){
