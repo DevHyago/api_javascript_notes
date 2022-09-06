@@ -2,6 +2,8 @@ require('dotenv/config');
 const { db } = require('./src/database/db');
 const express = require('express');
 require('express-async-errors');
+const cors = require('cors');
+
 const routeUser = require('./src/routes/users');
 const routeNote = require('./src/routes/notes');
 
@@ -10,6 +12,7 @@ const PORT = process.env.PORT;
 const app = express();
 app.use(express.json());
 
+app.use(cors());
 app.use('/user', routeUser);
 app.use('/note', routeNote);
 
