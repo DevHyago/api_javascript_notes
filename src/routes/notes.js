@@ -7,7 +7,8 @@ const router = Router();
 
 router.post('/', auth, noteController.create);
 router.get('/:id', auth, isOwner, noteController.findOne);
-router.get('/', auth, noteController.findAll)
-router.put('/:id', auth, isOwner, noteController.update)
+router.get('/', auth, noteController.findAll);
+router.put('/:id', auth, isOwner, noteController.update);
+router.delete('/:id', auth, isOwner, noteController.delete);
 
 module.exports = router;
