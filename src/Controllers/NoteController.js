@@ -3,6 +3,7 @@ const FindOneService = require('../services/note/FindOneService');
 const FindAllNoteService = require('../services/note/FindAllNoteService');
 const UpdateNoteService = require('../services/note/UpdateNoteService');
 const DeleteNoteService = require('../services/note/DeleteNoteService');
+const SearchNoteService = require('../services/note/SearchNoteService');
 
 class NoteController{
 
@@ -42,6 +43,14 @@ class NoteController{
       const deleteNoteService = new DeleteNoteService();
       await deleteNoteService.execute(id);
       return res.status(204).send();
+   }
+
+   async search(req, res){
+      const { query } = req.query;
+      const { id } = req.user;
+      const searchNoteService = new SearchNoteService();
+      const result = await searchNoteService.execute(query, id);
+      return res.json(result);
    }
 
 }

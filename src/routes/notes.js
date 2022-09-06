@@ -6,6 +6,7 @@ const noteController = require('../Controllers/NoteController');
 const router = Router();
 
 router.post('/', auth, noteController.create);
+router.get('/search', auth, noteController.search);
 router.get('/:id', auth, isOwner, noteController.findOne);
 router.get('/', auth, noteController.findAll);
 router.put('/:id', auth, isOwner, noteController.update);
